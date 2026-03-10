@@ -1,0 +1,239 @@
+// Uzd. 1
+
+let skaicius1 = +prompt(`Iveskite intervalo pradzia`);
+let skaicius2 = +prompt(`Iveskite intervalo pabaiga`);
+
+// for
+
+for (let i = skaicius1; i <= skaicius2; i++) {
+  console.log(i);
+}
+
+// while
+
+while (skaicius1 <= skaicius2) {
+  console.log(skaicius1);
+  skaicius1++;
+}
+
+// do...while
+
+do {
+  console.log(skaicius1);
+  skaicius1++;
+} while (skaicius1 <= skaicius2);
+
+// Uzd. 2
+
+let skaicius1 = +prompt(`Iveskite sveikaji skaiciu`);
+let skaicius2 = +prompt(`Iveskite antra sveikaji skaiciu`);
+
+if (skaicius1 < skaicius2) {
+  for (let i = skaicius1; i <= skaicius2; i++) {
+    if (i % 2 != 0) {
+      console.log(i);
+    }
+  }
+} else {
+  for (let i = skaicius1; i >= skaicius2; i--) {
+    if (i % 2 != 0) {
+      console.log(i);
+    }
+  }
+}
+
+// Uzd. 3
+
+let x = +prompt(`Enter number`); // Įvedamas skaičius.
+let y = x; // Naujas kintamasis skaitmenų išvedimui paeiliui (kad nepakistų).
+let n; // Atvirkščiai išvedami skaitmenys, reikalingi jų sumos apskaičiavimui `i`.
+let i = 0; // Pirmoje dalyje skaitmenų suma. Antroje tampa laipsniu.
+let c; // Išvedami iš eilės einantys skaitmenys.
+let akMasyvas = [];
+
+while (x > 0) {
+  n = Math.trunc(x % 10);
+  x = Math.trunc(x / 10);
+  i++;
+}
+
+while (y > 0 && i > 0) {
+  c = Math.trunc(y / Math.pow(10, i - 1));
+  akMasyvas.push(c);
+  y = y - c * Math.pow(10, i - 1);
+  i--;
+}
+
+let lytis;
+let amziusKadaGime;
+let gimimoMenesis;
+
+switch (akMasyvas[0]) {
+  case 3:
+  case 5:
+    lytis = `Vyras`;
+    break;
+  case 4:
+  case 6:
+    lytis = `Moteris`;
+    break;
+}
+
+switch (akMasyvas[0]) {
+  case 3:
+  case 4:
+    amziusKadaGime = `XX`;
+    break;
+  case 5:
+  case 6:
+    lytis = `XXI`;
+    break;
+}
+
+if (akMasyvas[3] == 0) {
+  switch (akMasyvas[4]) {
+    case 1:
+      gimimoMenesis = `Sausis`;
+      break;
+    case 2:
+      gimimoMenesis = `Vasaris`;
+      break;
+    case 3:
+      gimimoMenesis = `Kovas`;
+      break;
+    case 4:
+      gimimoMenesis = `Balandis`;
+      break;
+    case 5:
+      gimimoMenesis = `Geguze`;
+      break;
+    case 6:
+      gimimoMenesis = `Birzelis`;
+      break;
+    case 7:
+      gimimoMenesis = `Liepa`;
+      break;
+    case 8:
+      gimimoMenesis = `Rugpjutis`;
+      break;
+    case 9:
+      gimimoMenesis = `Ruggsejis`;
+      break;
+  }
+} else {
+  switch (akMasyvas[4]) {
+    case 0:
+      gimimoMenesis = `Spalis`;
+      break;
+    case 1:
+      gimimoMenesis = `Lapkritis`;
+      break;
+    case 2:
+      gimimoMenesis = `Gruodis`;
+      break;
+  }
+}
+
+let informacijaApieAsmeni = {};
+
+informacijaApieAsmeni.lytis = lytis;
+informacijaApieAsmeni.amzius = amziusKadaGime;
+informacijaApieAsmeni.gimimoMenuo = gimimoMenesis;
+
+console.log(`${lytis} ${amziusKadaGime} ${gimimoMenesis}`);
+
+// Uzd. 4
+
+// Duomenų saugojimas:
+
+let duomenys = getRandom();
+
+// Atsitiktinių reikšmių generavimas:
+
+function getRandom() {
+  let programuotojai = +prompt(`Iveskite programuotoju skaiciu`);
+  let masyvas = [];
+  console.log(programuotojai);
+  for (let i = 0; i < programuotojai; i++) {
+    masyvas.push(Math.trunc(Math.random() * (15 - 1 + 1) + 1));
+  }
+  console.log(masyvas.join(` `));
+  return masyvas;
+}
+
+// Dalyvių skaičius:
+
+function printMembersQt(masyvas) {
+  console.log(`Olimpiadoje dalyvavo ${masyvas.length} mokiniai.`);
+}
+
+printMembersQt(duomenys);
+
+// Bendras uždavinių skaičius:
+
+function calcTasksSolved(masyvas) {
+  let issprestiUzdaviniai = 0;
+  for (let i = 0; i < masyvas.length; i++) {
+    issprestiUzdaviniai += masyvas[i];
+  }
+  console.log(`Mokiniai iš viso išsprendė ${issprestiUzdaviniai} uždavinių`);
+}
+
+calcTasksSolved(duomenys);
+
+// Vidurkio skaičiavimas:
+
+function getAvgTasksPerPerson(masyvas) {
+  let issprestiUzdaviniai = 0;
+  let vidurkis = 0;
+  for (let i = 0; i < masyvas.length; i++) {
+    issprestiUzdaviniai += masyvas[i];
+    vidurkis = issprestiUzdaviniai / i;
+  }
+  console.log(`Vidutiniškai po ${vidurkis} uždavinius`);
+}
+
+getAvgTasksPerPerson(duomenys);
+
+// Dalyvių filtravimas:
+
+function countBestStudents(masyvas) {
+  let pazangiausiMokiniai = 0;
+  for (let i = 0; i < masyvas.length; i++) {
+    if (masyvas[i] > 5) {
+      pazangiausiMokiniai++;
+    }
+  }
+  console.log(
+    `${pazangiausiMokiniai} dalyviai išsprendė daugiau nei 5 uždavinius`
+  );
+}
+
+countBestStudents(duomenys);
+
+// 5
+
+let daugybosLentele = +prompt(`Iveskite daugybos lenteles dydi`);
+
+console.log(`---------------------------------------------------------------`);
+
+let pirmaEilute = [];
+for (let i = 1; i <= daugybosLentele; i++) {
+  pirmaEilute.push(i);
+}
+
+console.log(`| / | ${pirmaEilute.join(`   `)}`);
+
+console.log(`---------------------------------------------------------------`);
+
+for (let i = 1; i <= daugybosLentele; i++) {
+  let eilute = [];
+  for (let j = 1; j <= daugybosLentele; j++) {
+    eilute.push(i * j);
+  }
+  if (i < 10) {
+    console.log(`| ${i}  | ${eilute.join(`  `)} `);
+  } else {
+    console.log(`| ${i} | ${eilute.join(`  `)} `);
+  }
+}
